@@ -2,21 +2,22 @@
 const form = document.querySelector('form')
 let quizForm = document.querySelector('.quiz-form');
 let quiz = document.querySelector('.quiz');
-let username;
 let question = document.querySelector('.question');
-let questionNum = 0;
 let next = document.querySelector('.next')
-const api = 'https://opentdb.com/api.php?amount=10&category=23'
 let buttonsDiv = document.querySelector('#buttonsDiv')
-let buttons;
-let finalQuiz;
 let showQuestionNum = document.querySelector('.num-of-question');
-let correctAnswers=0;
 let scoreMessage = document.querySelector('.score-message')
 let loader = document.querySelector('.loader')
 let correctAnswerText = document.querySelector('.ans')
+let username;
+let buttons;
+let finalQuiz;
 let finish;
 let restart;
+let questionNum = 0;
+let correctAnswers=0;
+
+//api purpose
 let categories = {
     'history':23,
     'geography':22,
@@ -65,6 +66,7 @@ function finishQuiz(){
 }
 
 
+//main quiz logic
 function fullfilQuiz(array){
     if(questionNum == 9){
         next.style.display = 'none'
@@ -80,6 +82,7 @@ function fullfilQuiz(array){
     array[questionNum].incorrect_answers.push( array[questionNum].correct_answer);
     let options = array[questionNum].incorrect_answers;
     correctAnswerText.innerHTML = array[questionNum].correct_answer;
+
     //make buttons
     options.forEach(answer =>{
         let button = document.createElement('button');
@@ -88,6 +91,7 @@ function fullfilQuiz(array){
         buttonsDiv.appendChild(button)
         buttons = document.querySelectorAll('.option')
     })
+
     //adding action
     buttons.forEach(button=>{
         button.addEventListener('click',()=>{
@@ -118,9 +122,8 @@ function fullfilQuiz(array){
     
 
 }
-//reset buttons
+//reset buttons  after every question
 function resetButtons(obj){
-    
     next.classList.remove('next-enabled');
         for(let btn of buttons){
             btn.classList.remove('correct')
@@ -131,7 +134,7 @@ function resetButtons(obj){
 }
 
 
-
+//reset all setting before new quiz start
 function resetSettings(){
     question.style.visibility = 'visible';
     showQuestionNum.style.visibility = 'visible'
@@ -154,21 +157,20 @@ next.addEventListener('click',()=>{
 form.addEventListener('submit', async function(e){
     //PREVENT PAGE RELOAD
     e.preventDefault()
-    loader.style.visibility='visible'
-    quizForm.style.visibility = 'hidden';
-    username = e.target.username.value
-    const{category, difficulty} = e.target
+
+    const{category, difficulty} = e.target //info for api
     if(restart){
         quiz.removeChild(restart)
         next.style.display = 'block';
     }
+    loader.style.visibility='visible'
+    quizForm.style.visibility = 'hidden';
+    username = e.target.username.value
     //FETCH DATA
     await fetchData(`https://opentdb.com/api.php?amount=10&category=${categories[category.value]}&difficulty=${difficulty.value}`)
-
-    //FULLFIL DATA
     
     
-    //CHANGE DIVS
+    //Load animation
     setTimeout(()=>{
         fullfilQuiz(finalQuiz)
         loader.style.visibility='hidden'
