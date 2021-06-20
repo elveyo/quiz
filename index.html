@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+    <script defer src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div class="quiz-form">
+        <div class="loader">
+            <div class="circle"></div>
+        </div>
+            <h1 class="title">Quizzzz</h1>
+            <div class="form">
+                <form action="">
+                    <input type="text" id="username" placeholder="Enter username" required>
+                    <p class="choice">Category</p>
+                    <div class="category">
+                    <select name="category" id="">
+                        <option value="general">General Knowledge</option>
+                        <option value="nature">Science and Nature</option>
+                        <option value="animals">Animals</option>
+                        <option value="history">History</option>
+                        <option value="geography">Geography</option>
+                        <option value="sport">Sport</option>
+                        <option value="computer-science">Computer Science</option>
+                    </select>
+                </div>
+
+                <p class="choice">Difficulty</p>
+                <div class="category">
+                <select name="difficulty" id="">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+                    <button class="start-quiz">Start</button>
+                </form>
+            
+        </div>
+    </div>
+    
+    <p class="ans"></p>
+    <div class="quiz">
+        <div class="question-number">
+            <p class="num-of-question"></p>
+        </div>
+            <p class="question"></p>
+        <div class="buttons" id="buttonsDiv">
+            
+        </div>
+        <p class="score-message"></p>
+        <button class="next">Next</button>
+</div>
+    
+</body>
+</html>
